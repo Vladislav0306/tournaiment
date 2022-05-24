@@ -1,18 +1,24 @@
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 public class Game {
     private final List<Player> items = new ArrayList<>();
 
-    public Player[] findAll() {
-        return items.toArray(new Player[0]);
+    public Object hashMap(String name, int strength) {
+        for (Player player : findAll()) {
+            if (player.getStrength() == strength && Objects.equals(player.getName(), name)) {
+                return player;
+            }
+        }
+        return null;
     }
 
     public void register(Player player) {
         items.add(player);
+    }
+
+    public Player[] findAll() {
+        return items.toArray(new Player[0]);
     }
 
     public int round(Player playerName1, Player playerName2) throws NotRegisteredException {
