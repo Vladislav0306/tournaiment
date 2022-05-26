@@ -1,12 +1,12 @@
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
     Game game = new Game();
@@ -14,12 +14,10 @@ class GameTest {
     @Test
     public void shouldRegister() {
         Player player1 = new Player(1, "Аршавин", 100);
-        Player player2 = new Player(2, "Роналдо", 100);
         game.register(player1);
-        game.register(player2);
-        Player[] expected = {player1, player2};
-        Player[] actual = game.findAll();
-        assertArrayEquals(expected, actual);
+        Map<String, Integer> expected = Map.of("Аршавин", 1);
+        Map<String, Integer> actual = game.findAll();
+        assertEquals(expected, actual);
     }
 
     @Test

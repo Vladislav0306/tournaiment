@@ -1,25 +1,22 @@
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-
+import java.util.*;
+import java.util.HashMap;
 
 public class Game {
-    private final List<Player> items = new ArrayList<>();
-
-    public Player[] findAll() {
-        return items.toArray(new Player[0]);
-    }
+    Map<String, Integer> map = new HashMap<>();
 
     public void register(Player player) {
-        items.add(player);
+        map.put(player.getName(), player.getId());
+    }
+
+    public Map<String, Integer> findAll() {
+        return new HashMap<>(map);
     }
 
     public int round(Player playerName1, Player playerName2) throws NotRegisteredException {
         int result = 0;
-        for (Player player : findAll()) {
+        for (Map.Entry<String, Integer> ignored : map.entrySet()) {
             if (playerName1 == null || playerName2 == null) {
-                throw new NotRegisteredException("Player with name: " + player.getName() + " not registered");
+                throw new NotRegisteredException("Player with name: " + map.values() + " not registered");
             }
             if (playerName1.getStrength() > playerName2.getStrength()) {
                 result = 1;
