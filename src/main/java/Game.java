@@ -21,12 +21,15 @@ public class Game {
             if (playerName1 == null || playerName2 == null) {
                 throw new NotRegisteredException("Player with name: " + player.getName() + " not registered");
             }
-            if (playerName1.getStrength() > playerName2.getStrength())
+            if (playerName1.getStrength() > playerName2.getStrength()) {
                 result = 1;
-            else if (playerName1.getStrength() < playerName2.getStrength())
-                result = 2;
-            else
-                result = 0;
+            } else {
+                if (playerName1.getStrength() < playerName2.getStrength()) {
+                    result = 2;
+                } else {
+                    result = 0;
+                }
+            }
         }
         return result;
     }
