@@ -1,38 +1,32 @@
 import java.util.*;
-
+import java.util.HashMap;
 
 public class Game {
-    private final List<Player> items = new ArrayList<>();
-
-    public Object hashMap(String name, int strength) {
-        for (Player player : findAll()) {
-            if (player.getStrength() == strength && Objects.equals(player.getName(), name)) {
-                return player;
-            }
-        }
-        return null;
-    }
+    Map<String, Integer> map = new HashMap<>();
 
     public void register(Player player) {
-        items.add(player);
+        map.put(player.getName(), player.getId());
     }
 
-    public Player[] findAll() {
-        return items.toArray(new Player[0]);
+    public Map<String, Integer> findAll() {
+        return new HashMap<>(map);
     }
 
     public int round(Player playerName1, Player playerName2) throws NotRegisteredException {
         int result = 0;
-        for (Player player : findAll()) {
+        for (Map.Entry<String, Integer> ignored : map.entrySet()) {
             if (playerName1 == null || playerName2 == null) {
-                throw new NotRegisteredException("Player with name: " + player.getName() + " not registered");
+                throw new NotRegisteredException("Player with name: " + map.values() + " not registered");
             }
-            if (playerName1.getStrength() > playerName2.getStrength())
+            if (playerName1.getStrength() > playerName2.getStrength()) {
                 result = 1;
-            else if (playerName1.getStrength() < playerName2.getStrength())
-                result = 2;
-            else
-                result = 0;
+            } else {
+                if (playerName1.getStrength() < playerName2.getStrength()) {
+                    result = 2;
+                } else {
+                    result = 0;
+                }
+            }
         }
         return result;
     }

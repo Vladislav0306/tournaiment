@@ -1,7 +1,10 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,12 +14,10 @@ class GameTest {
     @Test
     public void shouldRegister() {
         Player player1 = new Player(1, "Аршавин", 100);
-        Player player2 = new Player(2, "Роналдо", 100);
         game.register(player1);
-        game.register(player2);
-        Player[] expected = {player1, player2};
-        Player[] actual = game.findAll();
-        assertArrayEquals(expected, actual);
+        Map<String, Integer> expected = Map.of("Аршавин", 1);
+        Map<String, Integer> actual = game.findAll();
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -65,37 +66,5 @@ class GameTest {
         int expected = 2;
         int actual = game.round(player1, player2);
         assertEquals(expected, actual);
-    }
-
-    @Test
-    public void hashMap() {
-        Player player1 = new Player(1, "Аршавин", 100);
-        Player player2 = new Player(2, "Роналдо", 150);
-        game.register(player1);
-        game.register(player2);
-        game.hashMap("Аршавин", 100);
-        assertEquals(player1, game.hashMap("Аршавин", 100));
-    }
-
-    @Test
-    public void hashMapNull() {
-        game.hashMap("Роналдо", 150);
-        assertNull(game.hashMap("Роналдо", 150));
-    }
-
-    @Test
-    public void hashMap2() {
-        Player player1 = new Player(1, "Аршавин", 100);
-        game.register(player1);
-        game.hashMap("Роналдо", 150);
-        assertNotEquals(player1, game.hashMap("Роналдо", 150));
-    }
-
-    @Test
-    public void hashMap3() {
-        Player player1 = new Player(1, "Аршавин", 100);
-        game.register(player1);
-        game.hashMap("Роналдо", 100);
-        assertNotEquals(player1, game.hashMap("Роналдо", 100));
     }
 }
